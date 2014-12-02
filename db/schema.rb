@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20141202013357) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "products", force: true do |t|
     t.string   "title"
     t.string   "desc"
@@ -26,8 +29,8 @@ ActiveRecord::Schema.define(version: 20141202013357) do
     t.integer "purchase_id"
   end
 
-  add_index "products_purchases", ["product_id"], name: "index_products_purchases_on_product_id"
-  add_index "products_purchases", ["purchase_id"], name: "index_products_purchases_on_purchase_id"
+  add_index "products_purchases", ["product_id"], name: "index_products_purchases_on_product_id", using: :btree
+  add_index "products_purchases", ["purchase_id"], name: "index_products_purchases_on_purchase_id", using: :btree
 
   create_table "purchases", force: true do |t|
     t.integer  "amount"
